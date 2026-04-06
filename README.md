@@ -69,3 +69,7 @@ default moodle p/w: kfdalkJfdsoiew#1
 5. set admin password from env var via entrypoint 
 6. Turn off PHP errors/warnings for prod.
 
+## committing to this repo
+
+Ensure to purge all caches before commit:
+http://localhost:8080/admin/purgecaches.php

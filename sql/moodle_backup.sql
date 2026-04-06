@@ -2870,7 +2870,7 @@ CREATE TABLE `capabilities` (
   `riskbitmask` bigint(10) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `capa_nam_uix` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=761 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='this defines all capabilities';
+) ENGINE=InnoDB AUTO_INCREMENT=764 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='this defines all capabilities';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3640,7 +3640,10 @@ INSERT INTO `capabilities` VALUES
 (757,'auth/oidc:manageconnection','write',30,'auth_oidc',2),
 (758,'auth/oidc:manageconnectionconnect','write',30,'auth_oidc',2),
 (759,'auth/oidc:manageconnectiondisconnect','write',30,'auth_oidc',2),
-(760,'local/staticpage:managedocuments','write',10,'local_staticpage',0);
+(760,'local/staticpage:managedocuments','write',10,'local_staticpage',0),
+(761,'logstore/xapi:viewerrorlog','read',10,'logstore_xapi',2),
+(762,'logstore/xapi:manageerrors','read',10,'logstore_xapi',2),
+(763,'logstore/xapi:managehistoric','read',10,'logstore_xapi',2);
 /*!40000 ALTER TABLE `capabilities` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -4581,7 +4584,7 @@ CREATE TABLE `config` (
   `value` longtext NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `conf_nam_uix` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=587 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='Moodle configuration variables';
+) ENGINE=InnoDB AUTO_INCREMENT=589 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='Moodle configuration variables';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4615,9 +4618,9 @@ INSERT INTO `config` VALUES
 (22,'mnet_all_hosts_id','2'),
 (23,'siteguest','1'),
 (24,'siteadmins','2'),
-(25,'themerev','1775443475'),
-(26,'jsrev','1775443475'),
-(27,'templaterev','1775443475'),
+(25,'themerev','1775451583'),
+(26,'jsrev','1775451583'),
+(27,'templaterev','1775451583'),
 (28,'gdversion','2'),
 (29,'licenses','unknown,allrightsreserved,public,cc-4.0,cc-nc-4.0,cc-nd-4.0,cc-nc-nd-4.0,cc-nc-sa-4.0,cc-sa-4.0'),
 (30,'sitedefaultlicense','unknown'),
@@ -4756,7 +4759,7 @@ INSERT INTO `config` VALUES
 (164,'autolangusercreation','1'),
 (165,'langmenu','1'),
 (166,'langlist',''),
-(167,'langrev','1775443475'),
+(167,'langrev','1775451583'),
 (168,'langcache','1'),
 (169,'langstringcache','1'),
 (170,'locale',''),
@@ -5041,11 +5044,11 @@ INSERT INTO `config` VALUES
 (450,'profilinglifetime','1440'),
 (451,'profilingimportprefix','(I)'),
 (452,'release','5.1.3 (Build: 20260216)'),
-(453,'localcachedirpurged','1775443475'),
-(454,'scheduledtaskreset','1775443475'),
+(453,'localcachedirpurged','1775451583'),
+(454,'scheduledtaskreset','1775451583'),
 (455,'paygw_plugins_sortorder','paypal'),
-(456,'allversionshash','39a311a86a74c5f9555107da91e9a3e2de64684b'),
-(457,'allcomponenthash','7be0552fce0424170c082950251098e235fb53db'),
+(456,'allversionshash','1ba7be82206c46c3376cc9202f625310cc1d96f0'),
+(457,'allcomponenthash','10f8a544359149271ef311a63ed69afc7e7f22e1'),
 (458,'registrationpending','1'),
 (460,'branch','501'),
 (461,'enableaccessibilitytools','1'),
@@ -5196,7 +5199,7 @@ CREATE TABLE `config_log` (
   PRIMARY KEY (`id`),
   KEY `conflog_tim_ix` (`timemodified`),
   KEY `conflog_use_ix` (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=1912 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='Changes done in server configuration through admin UI';
+) ENGINE=InnoDB AUTO_INCREMENT=1934 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='Changes done in server configuration through admin UI';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7117,7 +7120,29 @@ INSERT INTO `config_log` VALUES
 (1908,2,1775443625,'local_staticpage','cleanhtml','1',NULL),
 (1909,2,1775443625,'local_staticpage','checkavailability','1',NULL),
 (1910,2,1775443625,'local_staticpage','checkavailabilityconnecttimeout','0',NULL),
-(1911,2,1775443625,'local_staticpage','checkavailabilitytimeout','0',NULL);
+(1911,2,1775443625,'local_staticpage','checkavailabilitytimeout','0',NULL),
+(1912,2,1775451609,'logstore_xapi','endpoint','http://example.com/endpoint/location/',NULL),
+(1913,2,1775451609,'logstore_xapi','username','username',NULL),
+(1914,2,1775451609,'logstore_xapi','password','password',NULL),
+(1915,2,1775451609,'logstore_xapi','backgroundmode','1',NULL),
+(1916,2,1775451609,'logstore_xapi','maxbatchsize','30',NULL),
+(1917,2,1775451609,'logstore_xapi','maxbatchsizeforfailed','15',NULL),
+(1918,2,1775451609,'logstore_xapi','maxbatchsizeforhistorical','30',NULL),
+(1919,2,1775451609,'logstore_xapi','resendfailedbatches','0',NULL),
+(1920,2,1775451609,'logstore_xapi','mbox','0',NULL),
+(1921,2,1775451609,'logstore_xapi','send_name','1',NULL),
+(1922,2,1775451609,'logstore_xapi','shortcourseid','0',NULL),
+(1923,2,1775451609,'logstore_xapi','sendidnumber','0',NULL),
+(1924,2,1775451609,'logstore_xapi','send_username','0',NULL),
+(1925,2,1775451609,'logstore_xapi','account_homepage','http://localhost:8080',NULL),
+(1926,2,1775451609,'logstore_xapi','context_platform','Moodle',NULL),
+(1927,2,1775451609,'logstore_xapi','send_jisc_data','0',NULL),
+(1928,2,1775451609,'logstore_xapi','sendresponsechoices','0',NULL),
+(1929,2,1775451609,'logstore_xapi','enablesendingnotifications','1',NULL),
+(1930,2,1775451609,'logstore_xapi','errornotificationtrigger','10',NULL),
+(1931,2,1775451609,'logstore_xapi','send_additional_email_addresses','',NULL),
+(1932,2,1775451609,'logstore_xapi','logguests','0',NULL),
+(1933,2,1775451609,'logstore_xapi','routes','\\core\\event\\course_category_created,\\core\\event\\badge_awarded,\\core\\event\\badge_updated,\\core\\event\\badge_revoked,\\core\\event\\badge_viewed,\\core\\event\\message_sent,\\core\\event\\message_viewed,\\core\\event\\course_created,\\core\\event\\course_updated,\\core\\event\\calendar_event_created,\\core\\event\\calendar_event_updated,\\core\\event\\calendar_event_deleted,\\core\\event\\calendar_subscription_created,\\core\\event\\calendar_subscription_updated,\\core\\event\\calendar_subscription_deleted,\\core\\event\\course_completed,\\core\\event\\course_completion_updated,\\core\\event\\course_viewed,\\core\\event\\course_section_created,\\core\\event\\course_resources_list_viewed,\\core\\event\\group_created,\\core\\event\\group_deleted,\\core\\event\\group_message_sent,\\core\\event\\group_member_added,\\core\\event\\group_member_removed,\\core\\event\\note_created,\\core\\event\\note_updated,\\core\\event\\notes_viewed,\\core\\event\\user_created,\\core\\event\\user_enrolment_created,\\core\\event\\user_enrolment_deleted,\\core\\event\\user_enrolment_updated,\\core\\event\\user_loggedin,\\core\\event\\user_loggedinas,\\core\\event\\user_loggedout,\\core\\event\\course_module_created,\\core\\event\\course_module_completion_updated,\\core_h5p\\event\\h5p_viewed,\\core\\event\\search_results_viewed,\\core\\event\\questions_imported,\\core\\event\\question_created,\\mod_assign\\event\\assessable_submitted,\\mod_assign\\event\\submission_graded,\\mod_assign\\event\\feedback_viewed,\\mod_assign\\event\\submission_locked,\\mod_assign\\event\\submission_unlocked,\\mod_assign\\event\\submission_viewed,\\mod_assign\\event\\course_module_viewed,\\mod_bigbluebuttonbn\\event\\activity_management_viewed,\\mod_bigbluebuttonbn\\event\\live_session_event,\\mod_bigbluebuttonbn\\event\\meeting_created,\\mod_bigbluebuttonbn\\event\\meeting_ended,\\mod_bigbluebuttonbn\\event\\meeting_joined,\\mod_bigbluebuttonbn\\event\\meeting_left,\\mod_bigbluebuttonbn\\event\\recording_deleted,\\mod_bigbluebuttonbn\\event\\recording_edited,\\mod_bigbluebuttonbn\\event\\recording_imported,\\mod_bigbluebuttonbn\\event\\recording_protected,\\mod_bigbluebuttonbn\\event\\recording_published,\\mod_bigbluebuttonbn\\event\\recording_unprotected,\\mod_bigbluebuttonbn\\event\\recording_unpublished,\\mod_bigbluebuttonbn\\event\\recording_viewed,\\mod_book\\event\\course_module_viewed,\\mod_book\\event\\chapter_viewed,\\mod_book\\event\\chapter_created,\\mod_choice\\event\\course_module_viewed,\\mod_choice\\event\\answer_created,\\mod_data\\event\\course_module_viewed,\\mod_feedback\\event\\course_module_viewed,\\mod_feedback\\event\\response_submitted,\\mod_folder\\event\\course_module_viewed,\\mod_forum\\event\\course_module_viewed,\\mod_forum\\event\\discussion_created,\\mod_forum\\event\\discussion_viewed,\\mod_forum\\event\\post_created,\\mod_forum\\event\\post_deleted,\\mod_forum\\event\\post_updated,\\mod_forum\\event\\subscription_created,\\mod_forum\\event\\subscription_deleted,\\mod_forum\\event\\discussion_subscription_created,\\mod_forum\\event\\discussion_subscription_deleted,\\mod_forum\\event\\user_report_viewed,\\mod_glossary\\event\\course_module_viewed,\\mod_glossary\\event\\entry_viewed,\\mod_glossary\\event\\comment_created,\\mod_glossary\\event\\comment_deleted,\\mod_lesson\\event\\lesson_started,\\mod_lesson\\event\\lesson_resumed,\\mod_lesson\\event\\lesson_restarted,\\mod_lesson\\event\\lesson_ended,\\mod_lesson\\event\\question_viewed,\\mod_lesson\\event\\content_page_viewed,\\mod_lesson\\event\\question_answered,\\mod_lesson\\event\\essay_assessed,\\mod_imscp\\event\\course_module_viewed,\\mod_lesson\\event\\course_module_viewed,\\mod_lti\\event\\course_module_viewed,\\mod_page\\event\\course_module_viewed,\\mod_quiz\\event\\course_module_viewed,\\mod_quiz\\event\\attempt_abandoned,\\mod_quiz\\event\\attempt_becameoverdue,\\mod_quiz\\event\\attempt_started,\\mod_quiz\\event\\question_manually_graded,\\mod_quiz\\event\\attempt_reviewed,\\mod_quiz\\event\\attempt_submitted,\\mod_quiz\\event\\attempt_viewed,\\mod_resource\\event\\course_module_viewed,\\mod_scorm\\event\\course_module_viewed,\\mod_scorm\\event\\sco_launched,\\mod_scorm\\event\\scoreraw_submitted,\\mod_scorm\\event\\status_submitted,\\mod_url\\event\\course_module_viewed,\\mod_wiki\\event\\course_module_viewed,\\mod_wiki\\event\\comment_created,\\mod_wiki\\event\\comment_deleted,\\mod_wiki\\event\\comments_viewed,\\mod_wiki\\event\\page_viewed,\\mod_workshop\\event\\course_module_viewed,\\tool_usertours\\event\\tour_ended',NULL);
 /*!40000 ALTER TABLE `config_log` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -7137,7 +7162,7 @@ CREATE TABLE `config_plugins` (
   `value` longtext NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `confplug_plunam_uix` (`plugin`,`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2158 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='Moodle modules and plugins configuration variables';
+) ENGINE=InnoDB AUTO_INCREMENT=2181 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='Moodle modules and plugins configuration variables';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -9218,7 +9243,30 @@ INSERT INTO `config_plugins` VALUES
 (2154,'local_staticpage','checkavailabilityconnecttimeout','0'),
 (2155,'local_staticpage','checkavailabilitytimeout','0'),
 (2156,'core_plugin','recentfetch','1775443777'),
-(2157,'core_plugin','recentresponse','{\"status\":\"OK\",\"provider\":\"https:\\/\\/download.moodle.org\\/api\\/1.3\\/updates.php\",\"apiver\":\"1.3\",\"timegenerated\":1775443777,\"ticket\":\"JUM5JTkxZSVBRG8lODktJTdDJUI3JUMzJThGJUQwJUUxYSUxNiVCMkglQ0UlQ0UlQTklMDJhJTlEJTdFdiVCRCVBNCUxRiUzRSVGRXlfJURDJTEyJTFCJTg1JTdCJThDJTg5TA==\",\"forbranch\":\"5.1\",\"forversion\":\"2025100603\",\"updates\":{\"core\":[{\"version\":2025100603.1099999,\"release\":\"5.1.3+ (Build: 20260403)\",\"branch\":\"5.01\",\"maturity\":200,\"date\":1770774276,\"url\":\"https:\\/\\/download.moodle.org\",\"download\":\"https:\\/\\/download.moodle.org\\/download.php\\/direct\\/stable501\\/moodle-latest-501.zip\",\"norelease_index_info\":{\"version\":\"5.1.3+\",\"branch\":\"MOODLE_501_STABLE\",\"githash\":\"d831541\",\"date\":1775182968,\"zip\":{\"size\":99328208,\"md5\":true,\"sha256\":true},\"tgz\":{\"size\":75228524,\"md5\":true,\"sha256\":true}},\"release_index_info\":{\"version\":\"5.1.3\",\"branch\":\"MOODLE_501_STABLE\",\"githash\":\"4850fd3\",\"date\":1770774276,\"zip\":{\"size\":98704710,\"md5\":true,\"sha256\":true},\"tgz\":{\"size\":74615621,\"md5\":true,\"sha256\":true}},\"windows\":{\"size\":240993440}},{\"version\":2026040300,\"release\":\"5.2beta (Build: 20260403)\",\"branch\":\"5.02\",\"maturity\":100,\"date\":1775183152,\"url\":\"https:\\/\\/download.moodle.org\",\"download\":\"https:\\/\\/download.moodle.org\\/download.php\\/direct\\/moodle\\/moodle-latest.zip\",\"norelease_index_info\":{\"version\":\"5.2beta\",\"branch\":\"main\",\"githash\":\"bf96e85\",\"date\":1775183152,\"zip\":{\"size\":143570348,\"md5\":true,\"sha256\":true},\"tgz\":{\"size\":89381858,\"md5\":true,\"sha256\":true}},\"windows\":{\"size\":240129287}}],\"auth_oidc\":[{\"version\":\"2025100600\",\"release\":\"5.1.0\",\"maturity\":200,\"url\":\"https:\\/\\/moodle.org\\/plugins\\/pluginversion.php?id=39886\",\"download\":\"https:\\/\\/moodle.org\\/plugins\\/download.php\\/39886\\/auth_oidc_moodle51_2025100600.zip\",\"downloadmd5\":\"f31be9db0259f02f27a35b3e1980edb8\"}],\"local_staticpage\":[{\"version\":\"2025100600\",\"release\":\"v5.1-r1\",\"maturity\":200,\"url\":\"https:\\/\\/moodle.org\\/plugins\\/pluginversion.php?id=38521\",\"download\":\"https:\\/\\/moodle.org\\/plugins\\/download.php\\/38521\\/local_staticpage_moodle51_2025100600.zip\",\"downloadmd5\":\"fda2fb30bbfde4e8d6350ca5da498dcf\"}]}}');
+(2157,'core_plugin','recentresponse','{\"status\":\"OK\",\"provider\":\"https:\\/\\/download.moodle.org\\/api\\/1.3\\/updates.php\",\"apiver\":\"1.3\",\"timegenerated\":1775443777,\"ticket\":\"JUM5JTkxZSVBRG8lODktJTdDJUI3JUMzJThGJUQwJUUxYSUxNiVCMkglQ0UlQ0UlQTklMDJhJTlEJTdFdiVCRCVBNCUxRiUzRSVGRXlfJURDJTEyJTFCJTg1JTdCJThDJTg5TA==\",\"forbranch\":\"5.1\",\"forversion\":\"2025100603\",\"updates\":{\"core\":[{\"version\":2025100603.1099999,\"release\":\"5.1.3+ (Build: 20260403)\",\"branch\":\"5.01\",\"maturity\":200,\"date\":1770774276,\"url\":\"https:\\/\\/download.moodle.org\",\"download\":\"https:\\/\\/download.moodle.org\\/download.php\\/direct\\/stable501\\/moodle-latest-501.zip\",\"norelease_index_info\":{\"version\":\"5.1.3+\",\"branch\":\"MOODLE_501_STABLE\",\"githash\":\"d831541\",\"date\":1775182968,\"zip\":{\"size\":99328208,\"md5\":true,\"sha256\":true},\"tgz\":{\"size\":75228524,\"md5\":true,\"sha256\":true}},\"release_index_info\":{\"version\":\"5.1.3\",\"branch\":\"MOODLE_501_STABLE\",\"githash\":\"4850fd3\",\"date\":1770774276,\"zip\":{\"size\":98704710,\"md5\":true,\"sha256\":true},\"tgz\":{\"size\":74615621,\"md5\":true,\"sha256\":true}},\"windows\":{\"size\":240993440}},{\"version\":2026040300,\"release\":\"5.2beta (Build: 20260403)\",\"branch\":\"5.02\",\"maturity\":100,\"date\":1775183152,\"url\":\"https:\\/\\/download.moodle.org\",\"download\":\"https:\\/\\/download.moodle.org\\/download.php\\/direct\\/moodle\\/moodle-latest.zip\",\"norelease_index_info\":{\"version\":\"5.2beta\",\"branch\":\"main\",\"githash\":\"bf96e85\",\"date\":1775183152,\"zip\":{\"size\":143570348,\"md5\":true,\"sha256\":true},\"tgz\":{\"size\":89381858,\"md5\":true,\"sha256\":true}},\"windows\":{\"size\":240129287}}],\"auth_oidc\":[{\"version\":\"2025100600\",\"release\":\"5.1.0\",\"maturity\":200,\"url\":\"https:\\/\\/moodle.org\\/plugins\\/pluginversion.php?id=39886\",\"download\":\"https:\\/\\/moodle.org\\/plugins\\/download.php\\/39886\\/auth_oidc_moodle51_2025100600.zip\",\"downloadmd5\":\"f31be9db0259f02f27a35b3e1980edb8\"}],\"local_staticpage\":[{\"version\":\"2025100600\",\"release\":\"v5.1-r1\",\"maturity\":200,\"url\":\"https:\\/\\/moodle.org\\/plugins\\/pluginversion.php?id=38521\",\"download\":\"https:\\/\\/moodle.org\\/plugins\\/download.php\\/38521\\/local_staticpage_moodle51_2025100600.zip\",\"downloadmd5\":\"fda2fb30bbfde4e8d6350ca5da498dcf\"}]}}'),
+(2158,'logstore_xapi','version','2026022300'),
+(2159,'logstore_xapi','endpoint','http://example.com/endpoint/location/'),
+(2160,'logstore_xapi','username','username'),
+(2161,'logstore_xapi','password','password'),
+(2162,'logstore_xapi','backgroundmode','1'),
+(2163,'logstore_xapi','maxbatchsize','30'),
+(2164,'logstore_xapi','maxbatchsizeforfailed','15'),
+(2165,'logstore_xapi','maxbatchsizeforhistorical','30'),
+(2166,'logstore_xapi','resendfailedbatches','0'),
+(2167,'logstore_xapi','mbox','0'),
+(2168,'logstore_xapi','send_name','1'),
+(2169,'logstore_xapi','shortcourseid','0'),
+(2170,'logstore_xapi','sendidnumber','0'),
+(2171,'logstore_xapi','send_username','0'),
+(2172,'logstore_xapi','account_homepage','http://localhost:8080'),
+(2173,'logstore_xapi','context_platform','Moodle'),
+(2174,'logstore_xapi','send_jisc_data','0'),
+(2175,'logstore_xapi','sendresponsechoices','0'),
+(2176,'logstore_xapi','enablesendingnotifications','1'),
+(2177,'logstore_xapi','errornotificationtrigger','10'),
+(2178,'logstore_xapi','send_additional_email_addresses',''),
+(2179,'logstore_xapi','logguests','0'),
+(2180,'logstore_xapi','routes','\\core\\event\\course_category_created,\\core\\event\\badge_awarded,\\core\\event\\badge_updated,\\core\\event\\badge_revoked,\\core\\event\\badge_viewed,\\core\\event\\message_sent,\\core\\event\\message_viewed,\\core\\event\\course_created,\\core\\event\\course_updated,\\core\\event\\calendar_event_created,\\core\\event\\calendar_event_updated,\\core\\event\\calendar_event_deleted,\\core\\event\\calendar_subscription_created,\\core\\event\\calendar_subscription_updated,\\core\\event\\calendar_subscription_deleted,\\core\\event\\course_completed,\\core\\event\\course_completion_updated,\\core\\event\\course_viewed,\\core\\event\\course_section_created,\\core\\event\\course_resources_list_viewed,\\core\\event\\group_created,\\core\\event\\group_deleted,\\core\\event\\group_message_sent,\\core\\event\\group_member_added,\\core\\event\\group_member_removed,\\core\\event\\note_created,\\core\\event\\note_updated,\\core\\event\\notes_viewed,\\core\\event\\user_created,\\core\\event\\user_enrolment_created,\\core\\event\\user_enrolment_deleted,\\core\\event\\user_enrolment_updated,\\core\\event\\user_loggedin,\\core\\event\\user_loggedinas,\\core\\event\\user_loggedout,\\core\\event\\course_module_created,\\core\\event\\course_module_completion_updated,\\core_h5p\\event\\h5p_viewed,\\core\\event\\search_results_viewed,\\core\\event\\questions_imported,\\core\\event\\question_created,\\mod_assign\\event\\assessable_submitted,\\mod_assign\\event\\submission_graded,\\mod_assign\\event\\feedback_viewed,\\mod_assign\\event\\submission_locked,\\mod_assign\\event\\submission_unlocked,\\mod_assign\\event\\submission_viewed,\\mod_assign\\event\\course_module_viewed,\\mod_bigbluebuttonbn\\event\\activity_management_viewed,\\mod_bigbluebuttonbn\\event\\live_session_event,\\mod_bigbluebuttonbn\\event\\meeting_created,\\mod_bigbluebuttonbn\\event\\meeting_ended,\\mod_bigbluebuttonbn\\event\\meeting_joined,\\mod_bigbluebuttonbn\\event\\meeting_left,\\mod_bigbluebuttonbn\\event\\recording_deleted,\\mod_bigbluebuttonbn\\event\\recording_edited,\\mod_bigbluebuttonbn\\event\\recording_imported,\\mod_bigbluebuttonbn\\event\\recording_protected,\\mod_bigbluebuttonbn\\event\\recording_published,\\mod_bigbluebuttonbn\\event\\recording_unprotected,\\mod_bigbluebuttonbn\\event\\recording_unpublished,\\mod_bigbluebuttonbn\\event\\recording_viewed,\\mod_book\\event\\course_module_viewed,\\mod_book\\event\\chapter_viewed,\\mod_book\\event\\chapter_created,\\mod_choice\\event\\course_module_viewed,\\mod_choice\\event\\answer_created,\\mod_data\\event\\course_module_viewed,\\mod_feedback\\event\\course_module_viewed,\\mod_feedback\\event\\response_submitted,\\mod_folder\\event\\course_module_viewed,\\mod_forum\\event\\course_module_viewed,\\mod_forum\\event\\discussion_created,\\mod_forum\\event\\discussion_viewed,\\mod_forum\\event\\post_created,\\mod_forum\\event\\post_deleted,\\mod_forum\\event\\post_updated,\\mod_forum\\event\\subscription_created,\\mod_forum\\event\\subscription_deleted,\\mod_forum\\event\\discussion_subscription_created,\\mod_forum\\event\\discussion_subscription_deleted,\\mod_forum\\event\\user_report_viewed,\\mod_glossary\\event\\course_module_viewed,\\mod_glossary\\event\\entry_viewed,\\mod_glossary\\event\\comment_created,\\mod_glossary\\event\\comment_deleted,\\mod_lesson\\event\\lesson_started,\\mod_lesson\\event\\lesson_resumed,\\mod_lesson\\event\\lesson_restarted,\\mod_lesson\\event\\lesson_ended,\\mod_lesson\\event\\question_viewed,\\mod_lesson\\event\\content_page_viewed,\\mod_lesson\\event\\question_answered,\\mod_lesson\\event\\essay_assessed,\\mod_imscp\\event\\course_module_viewed,\\mod_lesson\\event\\course_module_viewed,\\mod_lti\\event\\course_module_viewed,\\mod_page\\event\\course_module_viewed,\\mod_quiz\\event\\course_module_viewed,\\mod_quiz\\event\\attempt_abandoned,\\mod_quiz\\event\\attempt_becameoverdue,\\mod_quiz\\event\\attempt_started,\\mod_quiz\\event\\question_manually_graded,\\mod_quiz\\event\\attempt_reviewed,\\mod_quiz\\event\\attempt_submitted,\\mod_quiz\\event\\attempt_viewed,\\mod_resource\\event\\course_module_viewed,\\mod_scorm\\event\\course_module_viewed,\\mod_scorm\\event\\sco_launched,\\mod_scorm\\event\\scoreraw_submitted,\\mod_scorm\\event\\status_submitted,\\mod_url\\event\\course_module_viewed,\\mod_wiki\\event\\course_module_viewed,\\mod_wiki\\event\\comment_created,\\mod_wiki\\event\\comment_deleted,\\mod_wiki\\event\\comments_viewed,\\mod_wiki\\event\\page_viewed,\\mod_workshop\\event\\course_module_viewed,\\tool_usertours\\event\\tour_ended');
 /*!40000 ALTER TABLE `config_plugins` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -9402,7 +9450,7 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
 INSERT INTO `course` VALUES
-(1,0,0,'Moodle Test Site','test site for dev purposes','','',0,'site',1,3,0,0,0,0,0,0,0,1,1,NULL,0,0,0,'','','',1775273017,1775273327,0,0,0,1775443475,NULL,1,NULL,NULL,NULL);
+(1,0,0,'Moodle Test Site','test site for dev purposes','','',0,'site',1,3,0,0,0,0,0,0,0,1,1,NULL,0,0,0,'','','',1775273017,1775273327,0,0,0,1775451583,NULL,1,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -15711,7 +15759,7 @@ CREATE TABLE `logstore_standard_log` (
   KEY `logsstanlog_cou_ix` (`courseid`),
   KEY `logsstanlog_rea_ix` (`realuserid`),
   KEY `logsstanlog_rel_ix` (`relateduserid`)
-) ENGINE=InnoDB AUTO_INCREMENT=1247 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='Standard log table';
+) ENGINE=InnoDB AUTO_INCREMENT=1272 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='Standard log table';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -16967,8 +17015,201 @@ INSERT INTO `logstore_standard_log` VALUES
 (1243,'\\core\\event\\config_log_created','core','created','config_log','config_log',1909,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"checkavailability\",\"oldvalue\":null,\"value\":\"1\",\"plugin\":\"local_staticpage\"}',1775443625,'web','172.20.0.1',NULL),
 (1244,'\\core\\event\\config_log_created','core','created','config_log','config_log',1910,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"checkavailabilityconnecttimeout\",\"oldvalue\":null,\"value\":\"0\",\"plugin\":\"local_staticpage\"}',1775443625,'web','172.20.0.1',NULL),
 (1245,'\\core\\event\\config_log_created','core','created','config_log','config_log',1911,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"checkavailabilitytimeout\",\"oldvalue\":null,\"value\":\"0\",\"plugin\":\"local_staticpage\"}',1775443625,'web','172.20.0.1',NULL),
-(1246,'\\core\\event\\course_viewed','core','viewed','course',NULL,NULL,'r',2,2,50,1,2,1,NULL,0,'null',1775446204,'web','172.20.0.1',NULL);
+(1246,'\\core\\event\\course_viewed','core','viewed','course',NULL,NULL,'r',2,2,50,1,2,1,NULL,0,'null',1775446204,'web','172.20.0.1',NULL),
+(1247,'\\core\\event\\capability_assigned','core','assigned','capability','role_capabilities',1,'u',0,1,10,0,2,0,NULL,0,'{\"capability\":\"logstore\\/xapi:viewerrorlog\",\"oldpermission\":0,\"permission\":1}',1775451583,'web','172.20.0.1',NULL),
+(1248,'\\core\\event\\capability_assigned','core','assigned','capability','role_capabilities',1,'u',0,1,10,0,2,0,NULL,0,'{\"capability\":\"logstore\\/xapi:manageerrors\",\"oldpermission\":0,\"permission\":1}',1775451583,'web','172.20.0.1',NULL),
+(1249,'\\core\\event\\capability_assigned','core','assigned','capability','role_capabilities',1,'u',0,1,10,0,2,0,NULL,0,'{\"capability\":\"logstore\\/xapi:managehistoric\",\"oldpermission\":0,\"permission\":1}',1775451583,'web','172.20.0.1',NULL),
+(1250,'\\core\\event\\config_log_created','core','created','config_log','config_log',1912,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"endpoint\",\"oldvalue\":null,\"value\":\"http:\\/\\/example.com\\/endpoint\\/location\\/\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1251,'\\core\\event\\config_log_created','core','created','config_log','config_log',1913,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"username\",\"oldvalue\":null,\"value\":\"username\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1252,'\\core\\event\\config_log_created','core','created','config_log','config_log',1914,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"password\",\"oldvalue\":null,\"value\":\"password\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1253,'\\core\\event\\config_log_created','core','created','config_log','config_log',1915,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"backgroundmode\",\"oldvalue\":null,\"value\":\"1\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1254,'\\core\\event\\config_log_created','core','created','config_log','config_log',1916,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"maxbatchsize\",\"oldvalue\":null,\"value\":\"30\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1255,'\\core\\event\\config_log_created','core','created','config_log','config_log',1917,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"maxbatchsizeforfailed\",\"oldvalue\":null,\"value\":\"15\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1256,'\\core\\event\\config_log_created','core','created','config_log','config_log',1918,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"maxbatchsizeforhistorical\",\"oldvalue\":null,\"value\":\"30\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1257,'\\core\\event\\config_log_created','core','created','config_log','config_log',1919,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"resendfailedbatches\",\"oldvalue\":null,\"value\":\"0\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1258,'\\core\\event\\config_log_created','core','created','config_log','config_log',1920,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"mbox\",\"oldvalue\":null,\"value\":\"0\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1259,'\\core\\event\\config_log_created','core','created','config_log','config_log',1921,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"send_name\",\"oldvalue\":null,\"value\":\"1\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1260,'\\core\\event\\config_log_created','core','created','config_log','config_log',1922,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"shortcourseid\",\"oldvalue\":null,\"value\":\"0\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1261,'\\core\\event\\config_log_created','core','created','config_log','config_log',1923,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"sendidnumber\",\"oldvalue\":null,\"value\":\"0\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1262,'\\core\\event\\config_log_created','core','created','config_log','config_log',1924,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"send_username\",\"oldvalue\":null,\"value\":\"0\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1263,'\\core\\event\\config_log_created','core','created','config_log','config_log',1925,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"account_homepage\",\"oldvalue\":null,\"value\":\"http:\\/\\/localhost:8080\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1264,'\\core\\event\\config_log_created','core','created','config_log','config_log',1926,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"context_platform\",\"oldvalue\":null,\"value\":\"Moodle\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1265,'\\core\\event\\config_log_created','core','created','config_log','config_log',1927,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"send_jisc_data\",\"oldvalue\":null,\"value\":\"0\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1266,'\\core\\event\\config_log_created','core','created','config_log','config_log',1928,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"sendresponsechoices\",\"oldvalue\":null,\"value\":\"0\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1267,'\\core\\event\\config_log_created','core','created','config_log','config_log',1929,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"enablesendingnotifications\",\"oldvalue\":null,\"value\":\"1\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1268,'\\core\\event\\config_log_created','core','created','config_log','config_log',1930,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"errornotificationtrigger\",\"oldvalue\":null,\"value\":\"10\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1269,'\\core\\event\\config_log_created','core','created','config_log','config_log',1931,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"send_additional_email_addresses\",\"oldvalue\":null,\"value\":\"\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1270,'\\core\\event\\config_log_created','core','created','config_log','config_log',1932,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"logguests\",\"oldvalue\":null,\"value\":\"0\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL),
+(1271,'\\core\\event\\config_log_created','core','created','config_log','config_log',1933,'c',0,1,10,0,2,0,NULL,0,'{\"name\":\"routes\",\"oldvalue\":null,\"value\":\"\\\\core\\\\event\\\\course_category_created,\\\\core\\\\event\\\\badge_awarded,\\\\core\\\\event\\\\badge_updated,\\\\core\\\\event\\\\badge_revoked,\\\\core\\\\event\\\\badge_viewed,\\\\core\\\\event\\\\message_sent,\\\\core\\\\event\\\\message_viewed,\\\\core\\\\event\\\\course_created,\\\\core\\\\event\\\\course_updated,\\\\core\\\\event\\\\calendar_event_created,\\\\core\\\\event\\\\calendar_event_updated,\\\\core\\\\event\\\\calendar_event_deleted,\\\\core\\\\event\\\\calendar_subscription_created,\\\\core\\\\event\\\\calendar_subscription_updated,\\\\core\\\\event\\\\calendar_subscription_deleted,\\\\core\\\\event\\\\course_completed,\\\\core\\\\event\\\\course_completion_updated,\\\\core\\\\event\\\\course_viewed,\\\\core\\\\event\\\\course_section_created,\\\\core\\\\event\\\\course_resources_list_viewed,\\\\core\\\\event\\\\group_created,\\\\core\\\\event\\\\group_deleted,\\\\core\\\\event\\\\group_message_sent,\\\\core\\\\event\\\\group_member_added,\\\\core\\\\event\\\\group_member_removed,\\\\core\\\\event\\\\note_created,\\\\core\\\\event\\\\note_updated,\\\\core\\\\event\\\\notes_viewed,\\\\core\\\\event\\\\user_created,\\\\core\\\\event\\\\user_enrolment_created,\\\\core\\\\event\\\\user_enrolment_deleted,\\\\core\\\\event\\\\user_enrolment_updated,\\\\core\\\\event\\\\user_loggedin,\\\\core\\\\event\\\\user_loggedinas,\\\\core\\\\event\\\\user_loggedout,\\\\core\\\\event\\\\course_module_created,\\\\core\\\\event\\\\course_module_completion_updated,\\\\core_h5p\\\\event\\\\h5p_viewed,\\\\core\\\\event\\\\search_results_viewed,\\\\core\\\\event\\\\questions_imported,\\\\core\\\\event\\\\question_created,\\\\mod_assign\\\\event\\\\assessable_submitted,\\\\mod_assign\\\\event\\\\submission_graded,\\\\mod_assign\\\\event\\\\feedback_viewed,\\\\mod_assign\\\\event\\\\submission_locked,\\\\mod_assign\\\\event\\\\submission_unlocked,\\\\mod_assign\\\\event\\\\submission_viewed,\\\\mod_assign\\\\event\\\\course_module_viewed,\\\\mod_bigbluebuttonbn\\\\event\\\\activity_management_viewed,\\\\mod_bigbluebuttonbn\\\\event\\\\live_session_event,\\\\mod_bigbluebuttonbn\\\\event\\\\meeting_created,\\\\mod_bigbluebuttonbn\\\\event\\\\meeting_ended,\\\\mod_bigbluebuttonbn\\\\event\\\\meeting_joined,\\\\mod_bigbluebuttonbn\\\\event\\\\meeting_left,\\\\mod_bigbluebuttonbn\\\\event\\\\recording_deleted,\\\\mod_bigbluebuttonbn\\\\event\\\\recording_edited,\\\\mod_bigbluebuttonbn\\\\event\\\\recording_imported,\\\\mod_bigbluebuttonbn\\\\event\\\\recording_protected,\\\\mod_bigbluebuttonbn\\\\event\\\\recording_published,\\\\mod_bigbluebuttonbn\\\\event\\\\recording_unprotected,\\\\mod_bigbluebuttonbn\\\\event\\\\recording_unpublished,\\\\mod_bigbluebuttonbn\\\\event\\\\recording_viewed,\\\\mod_book\\\\event\\\\course_module_viewed,\\\\mod_book\\\\event\\\\chapter_viewed,\\\\mod_book\\\\event\\\\chapter_created,\\\\mod_choice\\\\event\\\\course_module_viewed,\\\\mod_choice\\\\event\\\\answer_created,\\\\mod_data\\\\event\\\\course_module_viewed,\\\\mod_feedback\\\\event\\\\course_module_viewed,\\\\mod_feedback\\\\event\\\\response_submitted,\\\\mod_folder\\\\event\\\\course_module_viewed,\\\\mod_forum\\\\event\\\\course_module_viewed,\\\\mod_forum\\\\event\\\\discussion_created,\\\\mod_forum\\\\event\\\\discussion_viewed,\\\\mod_forum\\\\event\\\\post_created,\\\\mod_forum\\\\event\\\\post_deleted,\\\\mod_forum\\\\event\\\\post_updated,\\\\mod_forum\\\\event\\\\subscription_created,\\\\mod_forum\\\\event\\\\subscription_deleted,\\\\mod_forum\\\\event\\\\discussion_subscription_created,\\\\mod_forum\\\\event\\\\discussion_subscription_deleted,\\\\mod_forum\\\\event\\\\user_report_viewed,\\\\mod_glossary\\\\event\\\\course_module_viewed,\\\\mod_glossary\\\\event\\\\entry_viewed,\\\\mod_glossary\\\\event\\\\comment_created,\\\\mod_glossary\\\\event\\\\comment_deleted,\\\\mod_lesson\\\\event\\\\lesson_started,\\\\mod_lesson\\\\event\\\\lesson_resumed,\\\\mod_lesson\\\\event\\\\lesson_restarted,\\\\mod_lesson\\\\event\\\\lesson_ended,\\\\mod_lesson\\\\event\\\\question_viewed,\\\\mod_lesson\\\\event\\\\content_page_viewed,\\\\mod_lesson\\\\event\\\\question_answered,\\\\mod_lesson\\\\event\\\\essay_assessed,\\\\mod_imscp\\\\event\\\\course_module_viewed,\\\\mod_lesson\\\\event\\\\course_module_viewed,\\\\mod_lti\\\\event\\\\course_module_viewed,\\\\mod_page\\\\event\\\\course_module_viewed,\\\\mod_quiz\\\\event\\\\course_module_viewed,\\\\mod_quiz\\\\event\\\\attempt_abandoned,\\\\mod_quiz\\\\event\\\\attempt_becameoverdue,\\\\mod_quiz\\\\event\\\\attempt_started,\\\\mod_quiz\\\\event\\\\question_manually_graded,\\\\mod_quiz\\\\event\\\\attempt_reviewed,\\\\mod_quiz\\\\event\\\\attempt_submitted,\\\\mod_quiz\\\\event\\\\attempt_viewed,\\\\mod_resource\\\\event\\\\course_module_viewed,\\\\mod_scorm\\\\event\\\\course_module_viewed,\\\\mod_scorm\\\\event\\\\sco_launched,\\\\mod_scorm\\\\event\\\\scoreraw_submitted,\\\\mod_scorm\\\\event\\\\status_submitted,\\\\mod_url\\\\event\\\\course_module_viewed,\\\\mod_wiki\\\\event\\\\course_module_viewed,\\\\mod_wiki\\\\event\\\\comment_created,\\\\mod_wiki\\\\event\\\\comment_deleted,\\\\mod_wiki\\\\event\\\\comments_viewed,\\\\mod_wiki\\\\event\\\\page_viewed,\\\\mod_workshop\\\\event\\\\course_module_viewed,\\\\tool_usertours\\\\event\\\\tour_ended\",\"plugin\":\"logstore_xapi\"}',1775451609,'web','172.20.0.1',NULL);
 /*!40000 ALTER TABLE `logstore_standard_log` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
+-- Table structure for table `logstore_xapi_failed_log`
+--
+
+DROP TABLE IF EXISTS `logstore_xapi_failed_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `logstore_xapi_failed_log` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `eventname` varchar(255) NOT NULL DEFAULT '',
+  `component` varchar(100) NOT NULL DEFAULT '',
+  `action` varchar(100) NOT NULL DEFAULT '',
+  `target` varchar(100) NOT NULL DEFAULT '',
+  `objecttable` varchar(50) DEFAULT NULL,
+  `objectid` bigint(10) DEFAULT NULL,
+  `crud` varchar(1) NOT NULL DEFAULT '',
+  `edulevel` tinyint(1) NOT NULL,
+  `contextid` bigint(10) NOT NULL,
+  `contextlevel` bigint(10) NOT NULL,
+  `contextinstanceid` bigint(10) NOT NULL,
+  `userid` bigint(10) NOT NULL,
+  `courseid` bigint(10) DEFAULT NULL,
+  `relateduserid` bigint(10) DEFAULT NULL,
+  `anonymous` tinyint(1) NOT NULL DEFAULT 0,
+  `other` longtext DEFAULT NULL,
+  `timecreated` bigint(10) NOT NULL,
+  `origin` varchar(10) DEFAULT NULL,
+  `ip` varchar(45) DEFAULT NULL,
+  `realuserid` bigint(10) DEFAULT NULL,
+  `errortype` bigint(10) DEFAULT NULL,
+  `response` longtext DEFAULT NULL,
+  `logstorestandardlogid` bigint(10) DEFAULT NULL,
+  `type` bigint(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `logsxapifaillog_tim_ix` (`timecreated`),
+  KEY `logsxapifaillog_couanotim_ix` (`courseid`,`anonymous`,`timecreated`),
+  KEY `logsxapifaillog_useconconcr_ix` (`userid`,`contextlevel`,`contextinstanceid`,`crud`,`edulevel`,`timecreated`),
+  KEY `logsxapifaillog_log_ix` (`logstorestandardlogid`),
+  KEY `logsxapifaillog_typ_ix` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='xAPI holding table for failed events';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logstore_xapi_failed_log`
+--
+
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `logstore_xapi_failed_log` WRITE;
+/*!40000 ALTER TABLE `logstore_xapi_failed_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `logstore_xapi_failed_log` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
+-- Table structure for table `logstore_xapi_log`
+--
+
+DROP TABLE IF EXISTS `logstore_xapi_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `logstore_xapi_log` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `eventname` varchar(255) NOT NULL DEFAULT '',
+  `component` varchar(100) NOT NULL DEFAULT '',
+  `action` varchar(100) NOT NULL DEFAULT '',
+  `target` varchar(100) NOT NULL DEFAULT '',
+  `objecttable` varchar(50) DEFAULT NULL,
+  `objectid` bigint(10) DEFAULT NULL,
+  `crud` varchar(1) NOT NULL DEFAULT '',
+  `edulevel` tinyint(1) NOT NULL,
+  `contextid` bigint(10) NOT NULL,
+  `contextlevel` bigint(10) NOT NULL,
+  `contextinstanceid` bigint(10) NOT NULL,
+  `userid` bigint(10) NOT NULL,
+  `courseid` bigint(10) DEFAULT NULL,
+  `relateduserid` bigint(10) DEFAULT NULL,
+  `anonymous` tinyint(1) NOT NULL DEFAULT 0,
+  `other` longtext DEFAULT NULL,
+  `timecreated` bigint(10) NOT NULL,
+  `origin` varchar(10) DEFAULT NULL,
+  `ip` varchar(45) DEFAULT NULL,
+  `realuserid` bigint(10) DEFAULT NULL,
+  `logstorestandardlogid` bigint(10) DEFAULT NULL,
+  `type` bigint(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `logsxapilog_tim_ix` (`timecreated`),
+  KEY `logsxapilog_couanotim_ix` (`courseid`,`anonymous`,`timecreated`),
+  KEY `logsxapilog_useconconcruedu_ix` (`userid`,`contextlevel`,`contextinstanceid`,`crud`,`edulevel`,`timecreated`),
+  KEY `logsxapilog_log_ix` (`logstorestandardlogid`),
+  KEY `logsxapilog_typ_ix` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='xAPI holding table for cron processing';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logstore_xapi_log`
+--
+
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `logstore_xapi_log` WRITE;
+/*!40000 ALTER TABLE `logstore_xapi_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `logstore_xapi_log` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
+-- Table structure for table `logstore_xapi_notif_sent_log`
+--
+
+DROP TABLE IF EXISTS `logstore_xapi_notif_sent_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `logstore_xapi_notif_sent_log` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `failedlogid` bigint(10) NOT NULL,
+  `email` varchar(255) NOT NULL DEFAULT '',
+  `timecreated` bigint(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `logsxapinotisentlog_fai_ix` (`failedlogid`),
+  KEY `logsxapinotisentlog_ema_ix` (`email`),
+  KEY `logsxapinotisentlog_tim_ix` (`timecreated`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='xAPI holding table for sent notifications';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logstore_xapi_notif_sent_log`
+--
+
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `logstore_xapi_notif_sent_log` WRITE;
+/*!40000 ALTER TABLE `logstore_xapi_notif_sent_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `logstore_xapi_notif_sent_log` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
+-- Table structure for table `logstore_xapi_sent_log`
+--
+
+DROP TABLE IF EXISTS `logstore_xapi_sent_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `logstore_xapi_sent_log` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `logstorestandardlogid` bigint(10) DEFAULT NULL,
+  `type` bigint(10) DEFAULT NULL,
+  `timecreated` bigint(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `logsxapisentlog_log_ix` (`logstorestandardlogid`),
+  KEY `logsxapisentlog_typ_ix` (`type`),
+  KEY `logsxapisentlog_tim_ix` (`timecreated`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='xAPI holding table for sent events';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logstore_xapi_sent_log`
+--
+
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `logstore_xapi_sent_log` WRITE;
+/*!40000 ALTER TABLE `logstore_xapi_sent_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `logstore_xapi_sent_log` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
@@ -21891,7 +22132,7 @@ CREATE TABLE `role_capabilities` (
   KEY `rolecapa_con_ix` (`contextid`),
   KEY `rolecapa_mod_ix` (`modifierid`),
   KEY `rolecapa_cap_ix` (`capability`)
-) ENGINE=InnoDB AUTO_INCREMENT=1528 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='permission has to be signed, overriding a capability for a p';
+) ENGINE=InnoDB AUTO_INCREMENT=1531 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='permission has to be signed, overriding a capability for a p';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -23428,7 +23669,10 @@ INSERT INTO `role_capabilities` VALUES
 (1524,1,7,'tiny/recordrtc:recordaudio',1,1775273044,0),
 (1525,1,7,'tiny/recordrtc:recordvideo',1,1775273044,0),
 (1526,1,7,'tiny/recordrtc:recordscreen',1,1775273044,0),
-(1527,1,7,'tiny/recordrtc:use',1,1775273044,0);
+(1527,1,7,'tiny/recordrtc:use',1,1775273044,0),
+(1528,1,1,'logstore/xapi:viewerrorlog',1,1775451583,2),
+(1529,1,1,'logstore/xapi:manageerrors',1,1775451583,2),
+(1530,1,1,'logstore/xapi:managehistoric',1,1775451583,2);
 /*!40000 ALTER TABLE `role_capabilities` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -24151,7 +24395,7 @@ LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
 INSERT INTO `sessions` VALUES
 (2,0,'d5a1978fbc72814a26fdc2af9d65bb41',2,NULL,1775273116,1775273327,'172.20.0.1','172.20.0.1'),
-(4,0,'25dc6481916e303b78a2b0aebdc58f9b',2,NULL,1775442480,1775446368,'172.20.0.1','172.20.0.1');
+(4,0,'25dc6481916e303b78a2b0aebdc58f9b',2,NULL,1775442480,1775451608,'172.20.0.1','172.20.0.1');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -24822,7 +25066,7 @@ CREATE TABLE `task_scheduled` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `tasksche_cla_uix` (`classname`),
   KEY `tasksche_lasnex_ix` (`lastruntime`,`nextruntime`)
-) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='List of scheduled tasks to be run by cron.';
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='List of scheduled tasks to be run by cron.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -24950,7 +25194,11 @@ INSERT INTO `task_scheduled` VALUES
 (115,'factor_grace','\\factor_grace\\task\\revoke_expired_factors',0,1775344680,'18','0','*','*','*',0,0,0,NULL,NULL,NULL),
 (116,'factor_nosetup','\\factor_nosetup\\task\\delete_unusable_factors',0,1775346120,'42','0','*','*','*',0,0,0,NULL,NULL,NULL),
 (117,'auth_oidc','\\auth_oidc\\task\\cleanup_oidc_state_and_token',0,1775443500,'*','*','*','*','*',0,0,0,NULL,NULL,NULL),
-(118,'auth_oidc','\\auth_oidc\\task\\cleanup_oidc_sid',0,1775443860,'51','*','*','*','*',0,0,0,NULL,NULL,NULL);
+(118,'auth_oidc','\\auth_oidc\\task\\cleanup_oidc_sid',0,1775443860,'51','*','*','*','*',0,0,0,NULL,NULL,NULL),
+(119,'logstore_xapi','\\logstore_xapi\\task\\emit_task',0,1775451600,'*/1','*','*','*','*',0,0,0,NULL,NULL,NULL),
+(120,'logstore_xapi','\\logstore_xapi\\task\\failed_task',0,1775451600,'*/30','*','*','*','*',0,0,0,NULL,NULL,NULL),
+(121,'logstore_xapi','\\logstore_xapi\\task\\historical_task',0,1775451600,'0','*','*','*','*',0,0,0,NULL,NULL,NULL),
+(122,'logstore_xapi','\\logstore_xapi\\task\\sendfailednotifications_task',0,1775451600,'*','*/2','*','*','*',0,0,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `task_scheduled` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -26332,7 +26580,7 @@ CREATE TABLE `upgrade_log` (
   KEY `upgrlog_tim_ix` (`timemodified`),
   KEY `upgrlog_typtim_ix` (`type`,`timemodified`),
   KEY `upgrlog_use_ix` (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=1242 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='Upgrade logging';
+) ENGINE=InnoDB AUTO_INCREMENT=1246 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED COMMENT='Upgrade logging';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -27583,7 +27831,11 @@ INSERT INTO `upgrade_log` VALUES
 (1238,0,'auth_oidc','2025100600','2025100600','Plugin installed',NULL,'',2,1775443474),
 (1239,0,'local_staticpage',NULL,'2025100600','Starting plugin installation',NULL,'',2,1775443475),
 (1240,0,'local_staticpage','2025100600','2025100600','Upgrade savepoint reached',NULL,'',2,1775443475),
-(1241,0,'local_staticpage','2025100600','2025100600','Plugin installed',NULL,'',2,1775443475);
+(1241,0,'local_staticpage','2025100600','2025100600','Plugin installed',NULL,'',2,1775443475),
+(1242,2,'core','2025100603','2025100603','Exception: plugin_misplaced_exception','Plugin \"logstore_xapi\" is installed in incorrect location \"$CFG-&gt;dirroot/local/xapi\", expected location is \"$CFG-&gt;dirroot/admin/tool/log/store/xapi\"','* line 699 of /public/lib/upgradelib.php: plugin_misplaced_exception thrown\n* line 1949 of /public/lib/upgradelib.php: call to upgrade_plugins()\n* line 757 of /public/admin/index.php: call to upgrade_noncore()\n',2,1775451489),
+(1243,0,'logstore_xapi',NULL,'2026022300','Starting plugin installation',NULL,'',2,1775451583),
+(1244,0,'logstore_xapi','2026022300','2026022300','Upgrade savepoint reached',NULL,'',2,1775451583),
+(1245,0,'logstore_xapi','2026022300','2026022300','Plugin installed',NULL,'',2,1775451583);
 /*!40000 ALTER TABLE `upgrade_log` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -27708,7 +27960,7 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES
 (1,'manual',1,0,0,0,1,'guest','$6$rounds=10000$Hp3fON9bpojJpxJ2$xSHCsOEQPHBBf5y3AaDQSQpixm1AUCZ0WPIkJ3nRpkYuR3IJ3wuktCifZCS2.d5CI4SifIEQ0TUgxq2l3kOc30','','Guest user',' ','root@localhost',0,'','','','','','','','en','gregorian','','99',0,0,0,0,'','',0,'This user is a special user that allows read-only access to some courses.',1,1,0,2,1,0,0,1775273018,0,NULL,NULL,NULL,NULL,NULL,NULL),
-(2,'manual',1,0,0,0,1,'admin','$6$rounds=10000$mpqvI8jgFU6SmJDU$uCYQiJHx4crQe1Ksk5oht385P3moSr9C3ibN7yVqpR/ISLTOYcbG75KY9aVLkioLULos7zUEHGQ3RCto0P9uq.','','Admin','User','user@user.com',0,'','','','','','','','en','gregorian','','99',1775273116,1775446368,1775273116,1775442480,'172.20.0.1','',0,'',1,1,0,1,1,0,0,1775273189,0,NULL,'','','','',NULL);
+(2,'manual',1,0,0,0,1,'admin','$6$rounds=10000$mpqvI8jgFU6SmJDU$uCYQiJHx4crQe1Ksk5oht385P3moSr9C3ibN7yVqpR/ISLTOYcbG75KY9aVLkioLULos7zUEHGQ3RCto0P9uq.','','Admin','User','user@user.com',0,'','','','','','','','en','gregorian','','99',1775273116,1775451574,1775273116,1775442480,'172.20.0.1','',0,'',1,1,0,1,1,0,0,1775273189,0,NULL,'','','','',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -28814,4 +29066,4 @@ SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-04-06  3:41:18
+-- Dump completed on 2026-04-06  5:01:10

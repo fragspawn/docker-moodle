@@ -608,7 +608,6 @@ $cache = array (
     'local' => 
     array (
       'staticpage' => '/var/www/html/public/local/staticpage',
-      'xapi' => '/var/www/html/public/local/xapi',
     ),
     'h5plib' => 
     array (
@@ -744,6 +743,7 @@ $cache = array (
     array (
       'database' => '/var/www/html/public/admin/tool/log/store/database',
       'standard' => '/var/www/html/public/admin/tool/log/store/standard',
+      'xapi' => '/var/www/html/public/admin/tool/log/store/xapi',
     ),
     'factor' => 
     array (
@@ -926,6 +926,7 @@ $cache = array (
       array (
         0 => 'database',
         1 => 'standard',
+        2 => 'xapi',
       ),
     ),
     'tool_mfa' => 
@@ -4945,6 +4946,15 @@ $cache = array (
     'logstore_standard\\log\\store' => '/var/www/html/public/admin/tool/log/store/standard/classes/log/store.php',
     'logstore_standard\\privacy\\provider' => '/var/www/html/public/admin/tool/log/store/standard/classes/privacy/provider.php',
     'logstore_standard\\task\\cleanup_task' => '/var/www/html/public/admin/tool/log/store/standard/classes/task/cleanup_task.php',
+    'logstore_xapi\\form\\reportfilter_form' => '/var/www/html/public/admin/tool/log/store/xapi/classes/form/reportfilter_form.php',
+    'logstore_xapi\\log\\moveback' => '/var/www/html/public/admin/tool/log/store/xapi/classes/log/moveback.php',
+    'logstore_xapi\\log\\store' => '/var/www/html/public/admin/tool/log/store/xapi/classes/log/store.php',
+    'logstore_xapi\\output\\renderer' => '/var/www/html/public/admin/tool/log/store/xapi/classes/output/renderer.php',
+    'logstore_xapi\\privacy\\provider' => '/var/www/html/public/admin/tool/log/store/xapi/classes/privacy/provider.php',
+    'logstore_xapi\\task\\emit_task' => '/var/www/html/public/admin/tool/log/store/xapi/classes/task/emit_task.php',
+    'logstore_xapi\\task\\failed_task' => '/var/www/html/public/admin/tool/log/store/xapi/classes/task/failed_task.php',
+    'logstore_xapi\\task\\historical_task' => '/var/www/html/public/admin/tool/log/store/xapi/classes/task/historical_task.php',
+    'logstore_xapi\\task\\sendfailednotifications_task' => '/var/www/html/public/admin/tool/log/store/xapi/classes/task/sendfailednotifications_task.php',
     'ltiservice_basicoutcomes\\local\\resources\\basicoutcomes' => '/var/www/html/public/mod/lti/service/basicoutcomes/classes/local/resources/basicoutcomes.php',
     'ltiservice_basicoutcomes\\local\\service\\basicoutcomes' => '/var/www/html/public/mod/lti/service/basicoutcomes/classes/local/service/basicoutcomes.php',
     'ltiservice_basicoutcomes\\privacy\\provider' => '/var/www/html/public/mod/lti/service/basicoutcomes/classes/privacy/provider.php',
@@ -7640,7 +7650,6 @@ $cache = array (
       'local' => 
       array (
         'staticpage' => '/var/www/html/public/local/staticpage/lib.php',
-        'xapi' => '/var/www/html/public/local/xapi/lib.php',
       ),
       'h5plib' => 
       array (
@@ -7720,6 +7729,7 @@ $cache = array (
       ),
       'logstore' => 
       array (
+        'xapi' => '/var/www/html/public/admin/tool/log/store/xapi/lib.php',
       ),
       'factor' => 
       array (
@@ -7993,7 +8003,6 @@ $cache = array (
       'local' => 
       array (
         'staticpage' => '/var/www/html/public/local/staticpage/settings.php',
-        'xapi' => '/var/www/html/public/local/xapi/settings.php',
       ),
       'h5plib' => 
       array (
@@ -8071,6 +8080,7 @@ $cache = array (
       array (
         'database' => '/var/www/html/public/admin/tool/log/store/database/settings.php',
         'standard' => '/var/www/html/public/admin/tool/log/store/standard/settings.php',
+        'xapi' => '/var/www/html/public/admin/tool/log/store/xapi/settings.php',
       ),
       'factor' => 
       array (

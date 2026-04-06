@@ -33,8 +33,8 @@ phpmyadmin container to be deleted on staging/production, as it allows unrestric
 
 ## Setup
 
-* permissions in ./moodledata need to allow user/group 33 write permissions
-* Create .env to customise docker-compose settings.
+* permissions in ./moodledata need to allow UID/GID 33  to write
+* Create .env to customise docker-compose settings. Note backup uses Host's UID/GID 1000, but on mac its 501/20.
 
 ## Execution
 

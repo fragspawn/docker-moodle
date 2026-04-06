@@ -1,0 +1,14 @@
+{
+  "modules": [
+    {
+      "id": 1,
+      "name": "resource"
+    }
+  ],
+  "resource": [
+    {
+      "id": 1,
+      "name": "test_name"
+    }
+  ]
+}

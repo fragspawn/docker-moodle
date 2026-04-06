@@ -1,0 +1,96 @@
+name: moodle
+services:
+  mariadb:
+    image: mariadb:12.3-ubi-rc
+    container_name: moodle-mariadb
+    restart: unless-stopped
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_PASSWORD:-change-this-root-password}
+      - MARIADB_DATABASE=${MARIADB_DATABASE:-moodle}
+      - MARIADB_USER=${MARIADB_USER:-moodle}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD:-change-this-db-password}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./mariadb-conf/99-charset.cnf:/etc/my.cnf.d/99-charset.cnf:ro,z
+      - ./sql:/docker-entrypoint-initdb.d:z
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-uroot", "-pchange-this-root-password"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: moodle-phpmyadmin
+    environment:
+      PMA_HOST: ${MARIADB_HOST:-mariadb}
+      PMA_USER: ${MARIADB_USER:-moodle}
+      PMA_PASSWORD: ${MARIADB_PASSWORD:-change-this-db-password}
+      PMA_ARBITRARY: 1
+    restart: always
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    ports:
+      - 8081:80
+  redis:
+    image: redis:7-alpine
+    container_name: moodle-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "no"]
+    volumes:
+      - php_sessions_redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+  moodle:
+    build:
+      context: .
+      dockerfile: Dockerfile.moodle
+    container_name: moodle
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      - TZ=${TZ:-AEST}
+      - MOODLE_URL=${MOODLE_URL:-http://localhost:8080}
+      - MOODLE_DATAROOT=${MOODLE_DATAROOT:-/var/www/moodledata}
+      - MOODLE_DBTYPE=mariadb
+      - MOODLE_DBHOST=${MARIADB_HOST:-mariadb}
+      - MOODLE_DBPORT=3306
+      - MOODLE_DBNAME=${MARIADB_DATABASE:-moodle}
+      - MOODLE_DBUSER=${MARIADB_USER:-moodle}
+      - MOODLE_DBPASSWORD=${MARIADB_PASSWORD:-change-this-db-password}
+    volumes:
+      - ./moodle:/var/www/html:z
+      - ./moodledata:/var/www/moodledata:z
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/zz-custom.ini:ro,z
+  moodle-db-backup:
+    image: mariadb:12.3-ubi-rc
+    container_name: moodle-db-backup
+    restart: "no"
+    user: ${HOST_UID:-1000}:${HOST_GID:-1000}
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    command: /bin/sh -c "mariadb-dump -h $${MARIADB_HOST} --port=3306 --user=$${MARIADB_USER} --single-transaction --quick --lock-tables=false $${MARIADB_DATABASE} > /backup/moodle_backup.sql"
+    environment:
+      - MARIADB_DATABASE=${MARIADB_DATABASE:-moodle}
+      - MARIADB_USER=${MARIADB_USER:-moodle}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD:-change-this-db-password}
+      - MARIADB_HOST=${MARIADB_HOST:-mariadb}
+      - MYSQL_PWD=${MARIADB_PASSWORD:-change-this-db-password}
+    volumes:
+      - ./sql:/backup:z
+    working_dir: /backup
+    profiles:
+      - backup
+volumes:
+  mariadb_data:
+  php_sessions_redis:

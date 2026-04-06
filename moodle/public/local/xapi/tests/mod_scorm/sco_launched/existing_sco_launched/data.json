@@ -1,0 +1,20 @@
+{
+  "modules": [
+    {
+      "id": 1,
+      "name": "scorm"
+    }
+  ],
+  "scorm": [
+    {
+      "id": 1,
+      "name": "test_name"
+    }
+  ],
+  "scorm_scoes": [
+    {
+      "id": 1,
+      "scorm": 1
+    }
+  ]
+}

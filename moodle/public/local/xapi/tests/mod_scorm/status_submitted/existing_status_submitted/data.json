@@ -1,0 +1,38 @@
+{
+  "modules": [
+    {
+      "id": 1,
+      "name": "scorm"
+    }
+  ],
+  "scorm": [
+    {
+      "id": 1,
+      "name": "test_name"
+    }
+  ],
+  "scorm_attempt": [
+    {
+      "id": 1,
+      "userid": 1,
+      "scormid": 1,
+      "attempt": 1
+    }
+  ],
+  "scorm_element": [
+    {
+      "id": 1,
+      "element": "cmi.core.lesson_status"
+    }
+  ],
+  "scorm_scoes_value": [
+    {
+      "id": 1,
+      "scoid": 1,
+      "attemptid": 1,
+      "elementid": 1,
+      "value": "completed",
+      "timemodified": 0
+    }
+  ]
+}

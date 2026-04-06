@@ -1,0 +1,14 @@
+{
+  "modules": [
+    {
+      "id": 1,
+      "name": "scorm"
+    }
+  ],
+  "scorm": [
+    {
+      "id": 1,
+      "name": "test_name"
+    }
+  ]
+}

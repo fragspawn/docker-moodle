@@ -21,3 +21,5 @@ Temporary Items
 
 moodledata/cache
 moodledata/localcache
+moodledata/sessions
+sql/moodle_backup.sql
